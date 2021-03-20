@@ -53,6 +53,8 @@ burgdorf_final = burgdorf_final.astype(int)
 ## checking if sum is always nonnegative
 sumseries = burgdorf_final["sumcheck"].copy()
 sum(n < 0 for n in sumseries.values.flatten()) == 0 ##The answer was true. This confirms it upto reasonable lack of doubt that the dataset is clean enough for us to work with.
+## checking max concurrent vehicles in the parking lot
+max(burgdorf_final["sumcheck"]) ##The answer is 80. This is very reasonable for a parking lot with a total of 155 parking spaces.
 
 ##creating a csv file with burgdorf information
 burgdorf_final.to_csv("burgdorf_clean.csv",index = False)
