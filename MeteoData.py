@@ -14,8 +14,41 @@ tokens = json.loads(access_token_response.text)
 api_call_headers = {'Authorization': 'Bearer ' + tokens['access_token']}
 
 
-weather_url = f'https://weather-int.api.sbb.ch/2021-01-01T00:00:00.000+05:30--2021-02-28T23:59:59.000+05:30:PT1H/t_2m:C,precip_1h:mm/47.0607007264,7.62169447355/csv'
-# https://weather-int.api.sbb.ch/2021-02-15T00:00:00Z--2021-03-4T00:00:00Z:PT1H/fresh_snow_6h:cm,fresh_snow_1h:cm/46.50389,8.30325/csv
+
+''' Reference and documentation:
+    
+        https://www.meteomatics.com/en/api/getting-started/
+
+'''
+coordinates = '47.0607007264,7.62169447355' # Burgdorf co-ordinates
+dateRange = '2021-01-01T00:00:00.000+05:30--2021-02-28T23:59:59.000+05:30:PT1H' # PT1H means for every hour
+parameters = 't_2m:C,precip_1h:mm,fresh_snow_1h:cm' # Instant Temperature 2m above ground, in C
+                                                    # Precipitation by hour, in mm
+                                                    # Snowfall by hour, in cm
+
+weather_url = f'https://weather-int.api.sbb.ch/' + dateRange + '/' + parameters + '/' + coordinates + '/csv'
+
 print (weather_url)
 weather_response = requests.get(weather_url,headers=api_call_headers )
-# print(weather_response.text)
+
+f = open("Burgdorf.csv", "w")
+f.write(weather_response.text)  #   Writing raw data retrieved from API in a file
+f.close()
+
+
+# Reading file with RAW Data
+dfMeto = pd.read_csv('Burgdorf.csv', sep = ";")
+dfMeto.columns = ['DateTime', 'Temperature per Hour', 'Precipitation per Hour', 'Snowfall Hourly']
+
+
+# Changing Datetime to UNIX time
+dfMeto["DateTime"] = pd.to_datetime(dfMeto["DateTime"])
+
+for i in range(len(dfMeto)):
+    dfMeto.iloc[i,0] = datetime.datetime.timestamp(dfMeto.iloc[i,0])
+
+dfMeto.to_csv("BurgdorfMeteor.csv",index = False)
+
+
+# np.where(pd.isnull(dfMeto)) # checked: no empty values
+# dfMeto.head()
