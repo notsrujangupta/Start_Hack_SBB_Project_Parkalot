@@ -10,7 +10,7 @@ import datetime
 pd.options.mode.chained_assignment = None  # default='warn'
 
 
-folder = "C:/Users/Srujan Gupta/Desktop/Start Hack/"
+folder = ##insert folder here##
 
 ##since the data in "parkrail-sale-app-history.csv" and "parkrail-sale-app-2018" is all from before 2021, but the data found in "parkrail-burgdorf" all begins from January 1 2021, and because we intend to use UNIX time as one of our factors for judging the expected value for the full parking spots, (extrapolating data from Burgdorf's spots filled data in "parkrail-burgdorf.csv"), we will not be using them. For the purposes of this project, we will only use data from January 1 2021 in "parkrail-sale-app.csv" and "parkrail-sale-backend.csv".
 sale_app = pd.read_csv(folder+"parkrail-sale-app.csv",sep=';')
