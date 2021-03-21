@@ -51,7 +51,7 @@ In order to find the best spatial distribution of parking lots across Switzerlan
 
 The analysis resulted in 5 clusters. This told us that Switzerland has upto 5 categories of traffic data when it comes to passengers. If SBB wants to collect data that represents parking information for switzerland, they need to appropriately aquire information from stations thatthat are distributed across all 5 categories. To make things a clear, one station can only appear in one category. We then identified 10 different stations within each category by finding data points closest ot the centers of the clusters formed within the kmeans analysis. The list of recommended stations are provided in the hardware location folder as an image file named recommendations.
 
-<img src="/Kmeans_5_Clusters.png">
+<img src="/Kmeans_5_Clusters.JPG">
 This image shows the clusters of the data. There appear to be 6 clusters due to the image being displayed in 2D. the Kmeans analysis created a 3D clustering which when viewed in 2D appears to form 6 clusters instead of 5.
 
 
