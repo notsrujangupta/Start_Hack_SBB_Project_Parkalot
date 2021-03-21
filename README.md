@@ -28,7 +28,7 @@ We analysed the data given to us, performing as many statistical and validation 
 
 Furthermore, with the geospatial technical expertise in our team, we were also able to tackle the side challenge of identifying ideal locations for SBB to install their hardware at. Using K Means on passenger traffic data and the weather data, we were able to spatially identify 50 locations out of all the parking lots where SBB can install their hardware in order to gain data that will help accurately represent the parking conditions for the whole of Switzerland.
 
-<img src="https://camo.githubusercontent.com/2c1b3d708bdf1a0de377e39fdbd027921ef06aa5677272f625ba30bdd90db6b2/68747470733a2f2f6d656469612e646973636f72646170702e6e65742f6174746163686d656e74732f3734383036373037363731353035333136362f3832333039383935323736343438393732382f756e6b6e6f776e2e706e67%22%3E">
+<img src="/50LocationSpread.png">
 This map shows the spread of the 50 chosen locations for acquiring traffic data and are highlighted in lightblue. 
 
 ## Our solutions in depth
