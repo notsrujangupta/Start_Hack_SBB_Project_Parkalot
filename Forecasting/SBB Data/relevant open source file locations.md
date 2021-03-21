@@ -1,0 +1,5 @@
+Resources sold tickets / abo in the Park & App https://data.sbb.ch/explore/dataset/parkrail-sale-app/information/ https://data.sbb.ch/explore/dataset/parkrail-sale-app-history/information/ https://data.sbb.ch/explore/dataset/parkrail-sale-app-2018/information sold tickets / abo in the other sales channels https://data.sbb.ch/explore/dataset/parkrail-sale-backend/information/ detailed Information about Burgdorf https://data.sbb.ch/explore/dataset/parkrail-burgdorf/information/ detailed Information about Rapperswil https://data.sbb.ch/explore/dataset/park-ride-rapperswil/information total Amount of places https://data.sbb.ch/explore/dataset/mobilitat/information \
+
+Information about the trainstations in Switzerland https://data.sbb.ch/explore/dataset/dienststellen-gemass-opentransportdataswiss/information/ Information about the amount of trains at each Station https://data.sbb.ch/explore/dataset/anzahl-zuge-pro-haltestelle/table/?sort=betriebstag Information about the amount of people at each Station https://data.sbb.ch/explore/dataset/passagierfrequenz/information/ \
+
+from https://github.com/START-Global/SBB-STARTHACK21#resources
