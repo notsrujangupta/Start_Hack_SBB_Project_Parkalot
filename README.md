@@ -28,7 +28,8 @@ We analysed the data given to us, performing as many statistical and validation 
 
 Furthermore, with the geospatial technical expertise in our team, we were also able to tackle the side challenge of identifying ideal locations for SBB to install their hardware at. Using K Means on passenger traffic data and the weather data, we were able to spatially identify 50 locations out of all the parking lots where SBB can install their hardware in order to gain data that will help accurately represent the parking conditions for the whole of Switzerland.
 
-This map shows the spread of the 50 chosen locations for acquiring traffic data and are highlighted in orange. 
+<img src="https://camo.githubusercontent.com/2c1b3d708bdf1a0de377e39fdbd027921ef06aa5677272f625ba30bdd90db6b2/68747470733a2f2f6d656469612e646973636f72646170702e6e65742f6174746163686d656e74732f3734383036373037363731353035333136362f3832333039383935323736343438393732382f756e6b6e6f776e2e706e67%22%3E">
+This map shows the spread of the 50 chosen locations for acquiring traffic data and are highlighted in lightblue. 
 
 ## Our solutions in depth
 
@@ -46,7 +47,9 @@ https://weather-int.api.sbb.ch/2021-01-01T00:00:00.000+05:30--2021-02-28T23:59:5
 For the model, our preferred one seemed to be the 50 unit LSTM. In a heavily right skewed distribution with mean 24 and max possible occupancy of 155, our mean absolute error was just 12, and given the dataset's length and downsampling to hourly data (as opposed to second-basis), this is extremely powerful. As we're able to work on it in the future, we will certainly be able to create something much mroe sophisticated, powerful, and useful for SBB.
 
 ### Hardware Location Identification
-...
+In order to find the best spatial distribution of parking lots across Switzerland which also accurately portray parking lot information across the country, we decided to perform a Kmeans analysis on the passenger traffic data provided by SBB. It contained a spatial attribute with coordinates provided for each station/ parking lot and also provided traffic information for the whole week, weekdays and weekends. This allowed us to perform a multivariate Kmeans analysis on the data. the result was as displayed in the mapa above. The analysis resulted in 5 clusters. This told us that Switzerland has upto 5 categories of traffic data when it comes to passengers. If SBB wants to collect data that represents parking information for switzerland, they need to appropriately aquire information from stations thatthat are distributed across all 5 categories. To make things a clear, one station can only appear in one category. We then identified 10 different stations within each category by finding data points closest ot the centers of the clusters formed within the kmeans analysis. The list of recommended stations are provided below.
+
+
 
 ### Scalable Ideas
 1. Our clustering method will very easily get much more sophisticated the moment we're able to have access to more computational time and
