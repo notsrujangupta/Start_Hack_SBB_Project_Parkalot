@@ -4,7 +4,7 @@
 ### [Sehan Shetty](https://github.com/yttehs123)
 MSc in geo - data sciences and remote sensing with a background in climate sciences and forestry | [LinkedIn](https://www.linkedin.com/in/sehan-shetty/)
 ### [Srujan Gupta](https://github.com/notsrujangupta) 
-AI scientist with a bachelors in Mathematics | [LinkedIn](https://www.linkedin.com/in/notsrujangupta)
+AI scientist with a bachelors in Mathematics and PGP in AI/ML | [LinkedIn](https://www.linkedin.com/in/notsrujangupta)
 ### [Swapnil Dubey](https://github.com/swapdub)
 Data scientist with a double major in Electrical engineering and Astrophysics | [LinkedIn](https://www.linkedin.com/in/swapnil-dubey/)
 
@@ -24,7 +24,7 @@ We had to make a decision early on. We decided to focus all our energy on a tech
 
 We also are aware that SBB already has a functioning app with a parking feature in it. Therefore, rather than designing a UI for them, which they already seem to have done a good job at, we want to provide them with an as accurate as possible forecasting model which can directly be integrated into their app.
 
-We analysed the data given to us, performing as many statistical and validation tests on them as possible in order to fully realise the data's potential. This led us to using parking sales, weather data and parking lot occupancy data to create models that account for multiple variables. We then tested several forecasting models like...Results being....This model showed to be the most promising however the data we had was limiting. As SBB acquires more data with time, a more complex model can be  designed in the future that creates much more accurate forecasts. 
+We analysed the data given to us, performing as many statistical and validation tests on them as possible in order to fully realise the data's potential. This led us to using parking sales, weather data and parking lot occupancy data to create models that account for multiple variables. We then tested several forecasting models like VAR, LSTMs, and even much more complex solutions like a Multivariate AutoEncoder. Out of the models we tested, VAR ended up being nigh useless because the data was indeed time dependent, Multivariate AutoEncoder was far too complex and ended up overfitting the training data, but the relatively simple 50 unit LSTM worked relatively well. This model showed to be the most promising however the data we had was limiting. As SBB acquires more data with time, a more sophisticated model can be  designed in the future that creates much more accurate forecasts.
 
 Furthermore, with the geospatial technical expertise in our team, we were also able to tackle the side challenge of identifying ideal locations for SBB to install their hardware at. Using K Means on passenger traffic data and the weather data, we were able to spatially identify 50 locations out of all the parking lots where SBB can install their hardware in order to gain data that will help accurately represent the parking conditions for the whole of Switzerland.
 
@@ -33,7 +33,21 @@ This map shows the spread of the 50 chosen locations for acquiring traffic data 
 ## Our solutions in depth
 
 ### Forecasting Model
+Since SBB has so far been able to put sensors in 2 stations, "Burgdorf" and "Rapperswil," we were limited to tangible parking spot fill data from both of them. Of the two, Rapperswil's data was daily as opposed to hourly, and since we intended to give a proof of concept of our models on an hourly basis (this can get even more precise, allowing for computation time, upto second-by-second results!), we ignored Rapperswil altogether and stuck to Burgdorf because it gave information on all the entries and exits of vehicles from Jan 1 2021 to Feb 28 2021.
+
+Using that data, we had information on the vehicles that were present within the parking space (upto specific parking spots) for every single second. To fit it within the hackathon's timings, we chose to make hourly data, and generated a dataset for the number of vehicles present in burgdorf at every given hour from 0000 hours Jan 1 2021 to 2359 hours Feb 28 2021.
+
+We did the same thing for sales data. The historical and 2018 datasets for sales had no entries that ended after Jan 1 2021, so we chose to ignore them altogether. From the backend and App sales that ended in 2021, we first did further statistical analysis to figure out whether the sales data is truly usable. There were 7000+ entries of vehicles entering the parking lot but only 397 ticket instances after all! After some rough estimation and thorough data extraction, we realised that while the (rough) average duration of each vehicle in burgdorf was 3.81 days but the average duration of a ticket was 6.22 days. After consulting with a fwe experts from SBB, we came to the conclusion that this is perfectly reasonable and we can move on with the data as being complete enough to not adversely affect the model. This was a very real fear because a nontrivial chunk of sales data is lost in parking meters and other such thigns, making it harder to track it precisely.
+
+For the meteodata, we...
+
+For the model, our preferred one seemed to be the 50 unit LSTM. In a heavily right skewed distribution with mean 24 and max possible occupancy of 155, our mean absolute error was just 12, and given the dataset's length and downsampling to hourly data (as opposed to second-basis), this is extremely powerful. As we're able to work on it in the future, we will certainly be able to create something much mroe sophisticated, powerful, and useful for SBB.
 
 ### Hardware Location Identification
+...
 
 ### Scalable Ideas
+1. Our clustering method will very easily get much more sophisticated the moment we're able to have access to more computational time and
+2. Spot specific information - Customers love getting the aisle seat in planes. If the data ssuggests it, we can implement a spot specific predictor so that the customer can not only judge whether there will be a spot available for them at the parking lot, but whether the specific spot that they want is available.
+3. Routing - The current solution we have made will help SBB place sensors at appropriate parking lots to effectively gain data for all 590 of them, but once the system is online, we will also be able to help SBB route the traffic to other parking spots the customers may want to access in case the one the one they are looking for is closed. This offers a very simple yet effective revenue strategy: that of making people feel increasingly reliant on SBB parking spots when people want to be in an area for any reason, thus allowing SBB to get revenue form non SBB parking lots to let customers be routed to those other parking lots. It can help SBB become a sort of umbrella organisation even within the parking lot infrastructure of Switzerland, actively impacting people's choices rather than passively providing information.
+spot specific information (spot 1/spot 2, kinda like plane seats)
